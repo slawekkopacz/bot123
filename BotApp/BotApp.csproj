@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="InterviewCommand.cs" />
     <Compile Include="InterviewDialog.cs" />
+    <Compile Include="InterviewResult.cs" />
     <Compile Include="MainDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

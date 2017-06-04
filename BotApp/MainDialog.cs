@@ -18,14 +18,16 @@ namespace BotApp
 
         private async Task MessageReceived(IDialogContext context, IAwaitable<IMessageActivity> item)
         {
+            //todo[sk]: I'd expact to get LuisResult from some Luis Dialog. I'd extract entities form LuisResult and fill InterviewCommand.
+            //InterviewDialog will prompt for missing values and return result.
             var interviewCommand = new InterviewCommand();
             await context.Forward(new InterviewDialog(), ResumeAfterInterviewDialog, interviewCommand, System.Threading.CancellationToken.None);
         }
 
-        private async Task ResumeAfterInterviewDialog(IDialogContext context, IAwaitable<object> result)
+        private async Task ResumeAfterInterviewDialog(IDialogContext context, IAwaitable<InterviewResult> result)
         {
             var response = await result;
-            await context.PostAsync($"Interview dialog result: {response}");
+            await context.PostAsync(response.DisplayMessage());
             context.Done(new object());
         }
     }
